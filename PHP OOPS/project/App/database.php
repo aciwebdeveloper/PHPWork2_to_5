@@ -56,7 +56,7 @@ class Database
       $this->query = " INSERT INTO `{$table}` (`{$column}`) 
   VALUES ('{$values}')";
 
-      $this->execute($this->query, "DATA HAS BEEN INSERTED");
+    return $this->execute($this->query, "DATA HAS BEEN INSERTED");
 
 
     } else {
@@ -108,7 +108,7 @@ LIMIT 1;";
 
       if ($msg != null) {
 
-        $helper->SuccessMSG($msg);
+      return $helper->SuccessMSG($msg);
 
       } else {
         return true;
@@ -201,6 +201,41 @@ LIMIT 1;";
   }
 
 
+  public function DELETE_DATA($table,$WHERE=null){
+
+    $this->query="DELETE FROM `{$table}`";
+    if ($WHERE != null) {
+      $this->query.= " WHERE {$WHERE}";
+    }
+
+    $this->execute($this->query, "DATA HAS BEEN DELETED");
+
+  }
+
+public function updateDATA($table, $param, $WHERE=null){
+
+  // UPDATE table_name SET `column_name`=value , WHERE id = 
+$this->query="UPDATE `{$table}` SET ";
+
+$a="";
+foreach ($param as $key => $value) {
+
+  $a .= " `{$key}` = '{$value}' ,";
+
+}
+
+ $this->query .= rtrim($a,",");
+
+
+if ($WHERE != null) {
+    $this->query .= "WHERE {$WHERE}";
+}
+
+$this->execute($this->query, "DATA HAS BEEN UPDATED");
+
+}
+
+
   public function ShowResult($check = true, $col, $data)
   {
 
@@ -251,6 +286,7 @@ LIMIT 1;";
 
 
 
+
 }
 
 
@@ -288,7 +324,7 @@ class helper extends Database
 
   public function SuccessMSG($msg)
   {
-    echo "<div class='alert alert-success' role='alert'>
+    return "<div class='alert alert-success' role='alert'>
     {$msg}
   </div>";
 
@@ -320,5 +356,7 @@ class helper extends Database
 
 
 }
+
+
 
 ?>

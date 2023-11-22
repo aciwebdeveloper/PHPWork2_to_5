@@ -1,3 +1,4 @@
+
 <!doctype html>
 <html lang="en">
 
@@ -17,6 +18,7 @@
 <?php 
 require_once(dirname(__FILE__) ."/App/database.php");
 
+
 use App\database\Database as DB;
 use App\database\helper as help;
 
@@ -25,6 +27,8 @@ $obj= new DB();
 $obj2= new DB();
 
 $helper= new help();
+
+
 
 // $obj2->SelectAll("users","users.*, user_task.*","user_task.user_id=5","user_task ON users.user_id = user_task.user_id","user_task.task_id DESC");
 
@@ -40,17 +44,15 @@ $column=["#","userName","email"];//table heading
 
 $values=["user_id","user_name","email"]; // database table field/column name
 
- echo $obj2->ShowResult(true,$column, $values);
-
-
-
-
+//  echo $obj2->ShowResult(true,$column, $values);
 
 $data=[
  "user_name"=>"XYZ",
  "email"=>"XYZ@gmail.com",
- "password"=>"QWER",
 ];
+
+// $obj2->updateDATA("users",$data,"user_id = 5");
+// $obj2->DELETE_DATA("users","user_id = 5");
 
 // try {
  // $obj->insert("users",$data);
